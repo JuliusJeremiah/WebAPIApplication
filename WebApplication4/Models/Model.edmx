@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBForTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="apacct">
+          <Key>
+            <PropertyRef Name="id_col" />
+          </Key>
+          <Property Name="account" Type="char" MaxLength="36" />
+          <Property Name="descrip" Type="char" MaxLength="35" />
+          <Property Name="discount" Type="char" MaxLength="36" />
+          <Property Name="adjust" Type="char" MaxLength="36" />
+          <Property Name="checkno" Type="char" MaxLength="8" />
+          <Property Name="lpaydate" Type="datetime" />
+          <Property Name="currid" Type="char" MaxLength="3" />
+          <Property Name="adddate" Type="datetime" />
+          <Property Name="exadcnt" Type="decimal" Precision="8" Scale="0" />
+          <Property Name="used" Type="bit" />
+          <Property Name="tbalance" Type="money" />
+          <Property Name="revrate" Type="decimal" Precision="20" Scale="9" />
+          <Property Name="revdate" Type="datetime" />
+          <Property Name="exchfrz" Type="bit" />
+          <Property Name="reconstat" Type="char" MaxLength="1" />
+          <Property Name="bbalance" Type="money" />
+          <Property Name="ebalance" Type="money" />
+          <Property Name="acctmemo" Type="text" />
+          <Property Name="lckstat" Type="char" MaxLength="1" />
+          <Property Name="lckuser" Type="char" MaxLength="4" />
+          <Property Name="lcktime" Type="char" MaxLength="8" />
+          <Property Name="lckdate" Type="datetime" />
+          <Property Name="adduser" Type="char" MaxLength="4" />
+          <Property Name="addtime" Type="char" MaxLength="8" />
+          <Property Name="id_col" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Price_info">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Product_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="200" />
+          <Property Name="ProductDescription" Type="varchar" MaxLength="200" />
+          <Property Name="Product_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StudentAddress" Type="nvarchar" MaxLength="500" />
+          <Property Name="Branch" Type="nvarchar" MaxLength="50" />
+          <Property Name="Telephone" Type="int" />
+          <Property Name="BranchId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Product_info_Price_info">
+          <End Role="Price_info" Type="Self.Price_info" Multiplicity="0..1" />
+          <End Role="Product_info" Type="Self.Product_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_info">
+              <PropertyRef Name="Product_id" />
+            </Principal>
+            <Dependent Role="Product_info">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBForTestModelStoreContainer">
+          <EntitySet Name="apacct" EntityType="Self.apacct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Branch" EntityType="Self.Branch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Price_info" EntityType="Self.Price_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_info" EntityType="Self.Product_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Product_info_Price_info" Association="Self.FK_Product_info_Price_info">
+            <End Role="Price_info" EntitySet="Price_info" />
+            <End Role="Product_info" EntitySet="Product_info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBForTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="apacct">
+          <Key>
+            <PropertyRef Name="id_col" />
+          </Key>
+          <Property Name="account" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="descrip" Type="String" MaxLength="35" FixedLength="true" Unicode="false" />
+          <Property Name="discount" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="adjust" Type="String" MaxLength="36" FixedLength="true" Unicode="false" />
+          <Property Name="checkno" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="lpaydate" Type="DateTime" Precision="3" />
+          <Property Name="currid" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <Property Name="exadcnt" Type="Decimal" Precision="8" Scale="0" />
+          <Property Name="used" Type="Boolean" />
+          <Property Name="tbalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="revrate" Type="Decimal" Precision="20" Scale="9" />
+          <Property Name="revdate" Type="DateTime" Precision="3" />
+          <Property Name="exchfrz" Type="Boolean" />
+          <Property Name="reconstat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="bbalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="ebalance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="acctmemo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="lckstat" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="lckuser" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="lcktime" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="lckdate" Type="DateTime" Precision="3" />
+          <Property Name="adduser" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="addtime" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="id_col" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Branch">
+          <Key>
+            <PropertyRef Name="BranchId" />
+          </Key>
+          <Property Name="BranchId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Price_info">
+          <Key>
+            <PropertyRef Name="Product_id" />
+          </Key>
+          <Property Name="Product_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Product_info" Relationship="Self.FK_Product_info_Price_info" FromRole="Price_info" ToRole="Product_info" />
+        </EntityType>
+        <EntityType Name="Product_info">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ProductDescription" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Product_id" Type="Int32" />
+          <NavigationProperty Name="Price_info" Relationship="Self.FK_Product_info_Price_info" FromRole="Product_info" ToRole="Price_info" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StudentAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Branch" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Telephone" Type="Int32" />
+          <Property Name="BranchId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Product_info_Price_info">
+          <End Role="Price_info" Type="Self.Price_info" Multiplicity="0..1" />
+          <End Role="Product_info" Type="Self.Product_info" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Price_info">
+              <PropertyRef Name="Product_id" />
+            </Principal>
+            <Dependent Role="Product_info">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBForTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="apaccts" EntityType="Self.apacct" />
+          <EntitySet Name="Branches" EntityType="Self.Branch" />
+          <EntitySet Name="Price_info" EntityType="Self.Price_info" />
+          <EntitySet Name="Product_info" EntityType="Self.Product_info" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <AssociationSet Name="FK_Product_info_Price_info" Association="Self.FK_Product_info_Price_info">
+            <End Role="Price_info" EntitySet="Price_info" />
+            <End Role="Product_info" EntitySet="Product_info" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBForTestModelStoreContainer" CdmEntityContainer="DBForTestEntities">
+          <EntitySetMapping Name="apaccts">
+            <EntityTypeMapping TypeName="DBForTestModel.apacct">
+              <MappingFragment StoreEntitySet="apacct">
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="descrip" ColumnName="descrip" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="adjust" ColumnName="adjust" />
+                <ScalarProperty Name="checkno" ColumnName="checkno" />
+                <ScalarProperty Name="lpaydate" ColumnName="lpaydate" />
+                <ScalarProperty Name="currid" ColumnName="currid" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+                <ScalarProperty Name="exadcnt" ColumnName="exadcnt" />
+                <ScalarProperty Name="used" ColumnName="used" />
+                <ScalarProperty Name="tbalance" ColumnName="tbalance" />
+                <ScalarProperty Name="revrate" ColumnName="revrate" />
+                <ScalarProperty Name="revdate" ColumnName="revdate" />
+                <ScalarProperty Name="exchfrz" ColumnName="exchfrz" />
+                <ScalarProperty Name="reconstat" ColumnName="reconstat" />
+                <ScalarProperty Name="bbalance" ColumnName="bbalance" />
+                <ScalarProperty Name="ebalance" ColumnName="ebalance" />
+                <ScalarProperty Name="acctmemo" ColumnName="acctmemo" />
+                <ScalarProperty Name="lckstat" ColumnName="lckstat" />
+                <ScalarProperty Name="lckuser" ColumnName="lckuser" />
+                <ScalarProperty Name="lcktime" ColumnName="lcktime" />
+                <ScalarProperty Name="lckdate" ColumnName="lckdate" />
+                <ScalarProperty Name="adduser" ColumnName="adduser" />
+                <ScalarProperty Name="addtime" ColumnName="addtime" />
+                <ScalarProperty Name="id_col" ColumnName="id_col" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Branches">
+            <EntityTypeMapping TypeName="DBForTestModel.Branch">
+              <MappingFragment StoreEntitySet="Branch">
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Price_info">
+            <EntityTypeMapping TypeName="DBForTestModel.Price_info">
+              <MappingFragment StoreEntitySet="Price_info">
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_info">
+            <EntityTypeMapping TypeName="DBForTestModel.Product_info">
+              <MappingFragment StoreEntitySet="Product_info">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="DBForTestModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="StudentAddress" ColumnName="StudentAddress" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
