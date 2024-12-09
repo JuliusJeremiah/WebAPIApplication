@@ -220,6 +220,7 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="New file.js" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
